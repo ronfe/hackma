@@ -6,6 +6,9 @@ def convert_coordinate(x, y, d=50, q=75):
     nx, ny = q*x, q*y
     return nx +d, 305-ny
 
+def add_one(a,b):
+    return a+b+1
+
 def make_canvas(root, points, row=0, column=0):
     canvas = tk.Canvas(root, width=400, height=330)
     canvas.grid(row=row, column=column, rowspan=10, sticky='n')
