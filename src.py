@@ -20,7 +20,15 @@ def judge_type(_input, _output, index):
         "output": ["301"]
     },
     13: {
-        "input": ["101"],
+        "input": ["101"]},
+    #三角形的外角和
+    20: {
+        "input": ["306"],
+        "output": ["301"]
+    },
+    #角平分线的定义
+    99311: {
+        "input": ["311"],
         "output": ["301"]
     }
 }

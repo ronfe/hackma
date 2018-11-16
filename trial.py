@@ -6,8 +6,11 @@ def convert_coordinate(x, y, d=50, q=75):
     nx, ny = q*x, q*y
     return nx +d, 305-ny
 
-def add_one(a,b):
-    return a+b+1
+def delete_objs(canvas, objs):
+    for each in objs:
+        canvas.delete(each)
+    
+    return 0
 
 def make_canvas(root, points, row=0, column=0):
     canvas = tk.Canvas(root, width=400, height=330)
@@ -31,11 +34,41 @@ def make_canvas(root, points, row=0, column=0):
 def highlight(**kwargs):
     canvas = kwargs['canvas']
     points = kwargs['points']
-    temp_line_1 = canvas.create_line(points['B'][0], points['B'][1], points['C'][0], points['C'][1], fill='purple', width=5)
-    temp_line_2 = canvas.create_line(points['A'][0], points['A'][1], points['D'][0], points['D'][1], fill='purple', width=5)
+    obj = kwargs['obj']
 
-    canvas.after(4000, canvas.delete, temp_line_1)
-    canvas.after(4000, canvas.delete, temp_line_2)
+
+    highlighted = list()
+
+    for x,*z, y in obj:
+        if x == '△':
+            z1,z2 = z
+            temp_line = canvas.create_line(points[z1][0], points[z1][1], points[z2][0], points[z2][1], fill='purple', width=5)
+            highlighted.append(temp_line)
+
+            temp_line = canvas.create_line(points[z2][0], points[z2][1], points[y][0], points[y][1], fill='purple', width=5)
+            highlighted.append(temp_line)
+
+            temp_line = canvas.create_line(points[z1][0], points[z1][1], points[y][0], points[y][1], fill='purple', width=5)
+            highlighted.append(temp_line)
+        elif len(z) == 0:
+            temp_line = canvas.create_line(points[x][0], points[x][1], points[y][0], points[y][1], fill='purple', width=5)
+            highlighted.append(temp_line)
+        else:
+            z = z[0]
+
+            ## STEP 1
+            # (x0, y0), (x1,y1) = x+z, z+y
+
+            ## STEP 2
+            
+
+            ## STEP 3
+            temp_arc = canvas.create_line(points[x][0], points[x][1], points[z][0], points[z][1],  fill='green', width=5)
+            temp_arc_2 = canvas.create_line(points[z][0], points[z][1], points[y][0], points[y][1],  fill='green', width=5)
+
+            highlighted += [temp_arc, temp_arc_2]
+    
+    canvas.after(4000, delete_objs, canvas,highlighted)
     return 
 
 def main():
@@ -47,10 +80,26 @@ def main():
         "E": convert_coordinate(1.5, 3),
         "F": convert_coordinate(1,0)
     }
-    theorems = [
-        'AD∥BC',
-        'XYXYXYX',
-        '1234567'
+    theorems = [{
+        "type": "311",
+        "elems": ["AD", "EAC"],
+        "label": "AD是∠EAC的角平分线"
+    },
+        {
+            "type": "101",
+            "elems": ["AD", "BC"],
+            "label": "AD∥BC"
+        },
+        {
+            "type": "102",
+            "elems": ["AF", "BC"],
+            "label": "AF⊥BC"
+        },
+        {
+            "type": "306",
+            "elems": ["EAC", "△ABC"],
+            "label": "∠EAC 是 △ABC 的外角"
+        }
     ]
 
     root = tk.Tk()
@@ -70,7 +119,7 @@ def main():
     given_listbox.grid(row=0, column=1, rowspan=5)
     choices = list()
     for i, each in enumerate(theorems):
-        x = tk.Button(given_listbox, text=each, command=lambda: highlight(canvas=canvas_2, points=points)).grid(row=i+1, column=1)
+        x = tk.Button(given_listbox, text=each['label'], command= lambda k=each: highlight(canvas=canvas, points=points, obj=k['elems'])).grid(row=i+1, column=1)
         choices.append(x)
 
     root.mainloop()

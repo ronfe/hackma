@@ -51,22 +51,20 @@ def T12(setting, **kwargs):
         claims['elems'][1]
         )
     return k
-    
 
-def T13(setting, **kwargs):
+def TD311(setting, **kwargs):
     '''
-        两直线平行，内错角相等
+        角平分线的定义
         1-to-many
         rtype: bool
     '''
     condition = kwargs['conditions'][0]
     claims = kwargs['claims'][0]
-    k = src.judge_type([condition], [claims], 13)
+    k = src.judge_type([condition], [claims], 99311)
     if k == False:
         return k
-    
-    k = utility.angle_neicuo(setting, 
-        condition['elems'][0], 
+    #判断两个角是某个角的角平分角
+    k = utility.angle_pingfenjiao(condition['elems'][0], 
         condition['elems'][1],
         claims['elems'][0],
         claims['elems'][1]
@@ -77,18 +75,13 @@ def T13(setting, **kwargs):
 
 if __name__ == '__main__':
     c = {
-        "type": "101",
-        "elems": ["AD", "BC"],
-        "label": "AD∥BC"
+        "type": "311",
+        "elems": ["AD", "EAC"],
+        "label": "AD是∠EAC的角平分线"
     }
     r = {
         "type": "301",
-        "elems": ["DAC", "ACB"],
-        "label": "∠DAC=∠ACB"
+        "elems": ["EAD", "DAC"],
+        "label": "∠EAD=∠DAC"
     }
-    print(T13(setting, conditions=[c], claims=[r]))
-
-
-
-
-
+    print(TD311(setting, conditions=[c], claims=[r]))
