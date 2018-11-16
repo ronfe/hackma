@@ -60,7 +60,7 @@ def TD311(setting, **kwargs):
     '''
     condition = kwargs['conditions'][0]
     claim = kwargs['claims'][0]
-    pass
+    return False
     
     
 
