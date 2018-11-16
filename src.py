@@ -19,6 +19,16 @@ def judge_type(_input, _output, index):
         "input": ["101"],
         "output": ["301"]
     }
+    #三角形的外角和
+    20: {
+        "input": ["306"],
+        "output": ["301"]
+    }
+    #角平分线的定义
+    99311: {
+        "input": ["311"],
+        "output": ["301"]
+    }
 }
     i, o = theorem_type[index]['input'], theorem_type[index]['output']
     flag_i = False
