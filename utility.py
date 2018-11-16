@@ -31,7 +31,7 @@ def addup_keyword(setting, goal, position):
 
 
 def angle_tongwei(setting, parallel_a, parallel_b, angle_a, angle_b):
-    ### 1 同位角顶点需分别在线上
+    ### 1 同位角顶点在一条线上
     top_a, top_b = angle_a[1], angle_b[1]
     seg_a, seg_b = find_coline_point(setting, parallel_a[0], parallel_a[1]), find_coline_point(setting, parallel_b[0], parallel_b[1])
 
@@ -59,3 +59,38 @@ def angle_tongwei(setting, parallel_a, parallel_b, angle_a, angle_b):
         return True
 
     return False
+
+
+
+##3.构成内错关系
+def angle_neicuo(setting, parallel_a, parallel_b, angle_a, angle_b): #线AD 线BC 角DAC 角ACB
+    ### 1 内错角顶点在一条线上
+    top_a, top_b = angle_a[1], angle_b[1]  #顶点
+    seg_a, seg_b = find_coline_point(setting, parallel_a[0], parallel_a[1]), find_coline_point(setting, parallel_b[0], parallel_b[1])
+    
+    ### 2. 构成内错关系
+    #### 2.1  角23位 = 角12位    
+    con_point_23, con_point_12 = angle_a[1:], angle_b[0:2]
+    if not judge_presence(setting, con_point_23, con_point_12):
+        return False
+    
+    #### 2.2 角12位 （同方向）平行 角23位
+    alt_a, alt_b = find_alternative_segments(setting, parallel_a[0], parallel_a[1]), find_alternative_segments(setting, parallel_b[0], parallel_b[1])
+    if angle_a[1:] in alt_a and angle_b[1:] in alt_b:
+        return True
+
+    angle_a_23 = angle_a[0:2]
+    angle_b_23 = angle_b[1:]
+    a,b = addup_keyword(setting, angle_a_23[1], angle_a_23[0]),addup_keyword(setting, angle_b_23[1], angle_b_23[0])
+    direction_a = setting[angle_a_23[0]][a]
+    direction_b = setting[angle_b_23[0]][b]
+
+    if direction_a == direction_b:
+        return True
+
+    return False
+
+
+def judge_presence(setting, point_a,point_b): #判断
+    if point_a == point_b:
+        return True

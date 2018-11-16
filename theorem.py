@@ -52,7 +52,26 @@ def T12(setting, **kwargs):
         )
     return k
     
+
+def T13(setting, **kwargs):
+    '''
+        两直线平行，内错角相等
+        1-to-many
+        rtype: bool
+    '''
+    condition = kwargs['conditions'][0]
+    claims = kwargs['claims'][0]
+    k = src.judge_type([condition], [claims], 13)
+    if k == False:
+        return k
     
+    k = utility.angle_neicuo(setting, 
+        condition['elems'][0], 
+        condition['elems'][1],
+        claims['elems'][0],
+        claims['elems'][1]
+        )
+    return k
     
 
 
@@ -65,6 +84,11 @@ if __name__ == '__main__':
     r = {
         "type": "301",
         "elems": ["DAC", "ACB"],
-        "label": "∠EAD=∠EBC"
+        "label": "∠DAC=∠ACB"
     }
-    print(T12(setting, conditions=[c], claims=[r]))
+    print(T13(setting, conditions=[c], claims=[r]))
+
+
+
+
+

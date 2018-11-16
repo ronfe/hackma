@@ -18,8 +18,14 @@ def judge_type(_input, _output, index):
     12: {
         "input": ["101"],
         "output": ["301"]
+    },
+    13: {
+        "input": ["101"],
+        "output": ["301"]
     }
 }
+
+
     i, o = theorem_type[index]['input'], theorem_type[index]['output']
     flag_i = False
     flag_o = False
