@@ -9,7 +9,11 @@ def find_coline_point(setting, point_a, point_b):
 def judge_coline(setting, point_a, point_b):
     if point_a == point_b:
         return True
-    return point_b in setting[point_a]
+    
+    k = ''
+    for each in setting[point_a]:
+        k += each
+    return point_b in k
 
 
 def find_alternative_segments(setting, point_a, point_b):
