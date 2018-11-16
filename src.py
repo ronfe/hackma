@@ -8,7 +8,11 @@ r = [{
     "elems": ["EAD", "EBC"],
     "label": "∠EAD=∠EBC"
 }]
-
+a = [{
+    "type": "",
+    "elems": [""],
+    "label": ""
+}]
 
 
 
@@ -20,7 +24,9 @@ def judge_type(_input, _output, index):
         "output": ["301"]
     },
     13: {
-        "input": ["101"]},
+        "input": ["101"],
+        "output": ["301"]
+        },
     #三角形的外角和
     20: {
         "input": ["306"],

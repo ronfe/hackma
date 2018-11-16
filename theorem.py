@@ -70,6 +70,19 @@ def TD311(setting, **kwargs):
         claims['elems'][1]
         )
     return k
+
+
+def T13(setting, **kwargs):
+    '''
+        两直线平行，内错角相等
+        1-to-many
+        rtype: bool
+    '''
+    condition = kwargs['conditions'][0]
+    claims = kwargs['claims'][0]
+    k = src.judge_type([condition], [claims], 13)
+    if k == False:
+        return k
     
 
 
@@ -84,4 +97,4 @@ if __name__ == '__main__':
         "elems": ["EAD", "DAC"],
         "label": "∠EAD=∠DAC"
     }
-    print(TD311(setting, conditions=[c], claims=[r]))
+    print(T13(setting, conditions=[c], claims=[r]))
