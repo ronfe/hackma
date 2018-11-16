@@ -51,20 +51,29 @@ def T12(setting, **kwargs):
         claims['elems'][1]
         )
     return k
-    
+
+def TD311(setting, **kwargs):
+    '''
+        角平分线的定义
+        1-to-many
+        rtype: bool
+    '''
+    condition = kwargs['conditions'][0]
+    claim = kwargs['claims'][0]
+    pass
     
     
 
 
 if __name__ == '__main__':
     c = {
-        "type": "101",
-        "elems": ["AD", "BC"],
-        "label": "AD∥BC"
+        "type": "311",
+        "elems": ["AD", "EAC"],
+        "label": "AD是∠EAC的角平分线"
     }
     r = {
         "type": "301",
-        "elems": ["DAC", "ACB"],
-        "label": "∠EAD=∠EBC"
+        "elems": ["EAD", "DAC"],
+        "label": "∠EAD=∠DACC"
     }
-    print(T12(setting, conditions=[c], claims=[r]))
+    print(TD311(setting, conditions=[c], claims=[r]))
