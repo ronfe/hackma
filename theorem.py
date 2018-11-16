@@ -59,9 +59,17 @@ def TD311(setting, **kwargs):
         rtype: bool
     '''
     condition = kwargs['conditions'][0]
-    claim = kwargs['claims'][0]
-    pass
-    
+    claims = kwargs['claims'][0]
+    k = src.judge_type([condition], [claims], 99311)
+    if k == False:
+        return k
+    #判断两个角是某个角的角平分角
+    k = utility.angle_pingfenjiao(condition['elems'][0], 
+        condition['elems'][1],
+        claims['elems'][0],
+        claims['elems'][1]
+        )
+    return k
     
 
 
@@ -74,6 +82,6 @@ if __name__ == '__main__':
     r = {
         "type": "301",
         "elems": ["EAD", "DAC"],
-        "label": "∠EAD=∠DACC"
+        "label": "∠EAD=∠DAC"
     }
     print(TD311(setting, conditions=[c], claims=[r]))

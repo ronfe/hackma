@@ -60,17 +60,21 @@ def angle_tongwei(setting, parallel_a, parallel_b, angle_a, angle_b):
 
     return False
 
-#判断两个角共点
-def angle_samepoint(angle_a, angle_b):
-    k1 = angle_a[1]
-    k2 = angle_b[1]
-    if k1 !== k2
-        return False
 
-#判断两个角共边，且公共边是角平分线
-def angle_
-
-
-#判断两个角是某角的两个平分角
-def angle_pingfenjiao():
-    pass
+#判断两个角是某角的两个平分角 angle_a是大角
+def angle_pingfenjiao(line_a, angle_a, angle_b, angle_c):
+    if angle_a[1] == angle_b[1] == angle_c[1]:
+        if angle_a[0] == angle_b[0]:
+            if angle_b[2] == line_a[1]:
+                if angle_c[0] == line_a[1]:
+                    return True
+                else: return False
+            else: return False
+        elif angle_a[0] == angle_c[0]:
+                if angle_b[0] == line_a[1]:
+                    if angle_c[2] == line_a[1]:
+                        return True
+                    else: return False
+                else: return False
+        else: return False
+    else: return False
