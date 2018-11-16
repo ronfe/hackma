@@ -52,6 +52,7 @@ def T12(setting, **kwargs):
         )
     return k
 
+
 def TD311(setting, **kwargs):
     '''
         角平分线的定义
@@ -84,7 +85,7 @@ def T13(setting, **kwargs):
     if k == False:
         return k
 
-
+   
 def T20 (setting, **kwargs):
     '''
         三角形外角等于不相邻的两个内角和

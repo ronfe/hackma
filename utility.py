@@ -103,10 +103,11 @@ def angle_pingfenjiao(line_a, angle_a, angle_b, angle_c):
     if angle_a[1] == angle_b[1] == angle_c[1]:
         if angle_a[0] == angle_b[0]:
             if angle_b[2] == line_a[1]:
-                if angle_c[0] == line_a[1]:
                     return True
-                else: return False
-            else: return False
+            else: 
+                return False
+            # else: 
+            #     return False
         elif angle_a[0] == angle_c[0]:
                 if angle_b[0] == line_a[1]:
                     if angle_c[2] == line_a[1]:
@@ -115,3 +116,17 @@ def angle_pingfenjiao(line_a, angle_a, angle_b, angle_c):
                 else: return False
         else: return False
     else: return False
+
+
+def judge_buxianglinneijiaohe(angle_a):
+    if angle_a[0] != "A":
+        if angle_a[3] != "A":
+            return False
+        elif angle_a[4] == "B" and angle_a[5] == "C" and angle_a[0] == "B" and angle_a[1] =="C" and angle_a[2] == "A":
+            return True
+        else: 
+            return False
+    elif angle_a[1] == "B" and angle_a[2] =="C" and angle_a[3] == "B" and angle_a[4] == "C" and angle_a[5] == "A":
+            return True
+    else:
+        return False
