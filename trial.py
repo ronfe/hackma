@@ -12,6 +12,19 @@ def delete_objs(canvas, objs):
     
     return 0
 
+def make_label(root, clicked_items):
+    t = clicked_items[-1]
+    temp_label = tk.Label(root, text=t)
+    return temp_label
+
+
+def grid_label(root, clicked_items, stored_labels):
+    this_label = make_label(root, clicked_items)
+    stored_labels.append(this_label)
+    this_label.grid(column=3, row=len(stored_labels)+ 1)
+    return 
+
+
 def make_canvas(root, points, row=0, column=0):
     canvas = tk.Canvas(root, width=400, height=330)
     canvas.grid(row=row, column=column, rowspan=10, sticky='n')
@@ -35,7 +48,11 @@ def highlight(**kwargs):
     canvas = kwargs['canvas']
     points = kwargs['points']
     obj = kwargs['obj']
+    label = kwargs['label']
+    ct = kwargs['ct']
 
+    ct.append(label)
+    
 
     highlighted = list()
 
@@ -107,7 +124,7 @@ def main():
     root.title("Hack 2018")
 
     canvas = make_canvas(root, points)
-    canvas_2 = make_canvas(root, points, row=11)
+    #canvas_2 = make_canvas(root, points, row=11)
 
     # temp_line = canvas.create_line(points['B'][0], points['B'][1], points['C'][0], points['C'][1], fill='purple', width=5)
     # canvas.after(4000, canvas.delete, temp_line)
@@ -116,12 +133,26 @@ def main():
     # condition_frames = insert_given(theorems, given_frame)
 
     given_listbox = tk.Listbox(root, highlightbackground='black', highlightcolor='black', highlightthickness=1)
-    given_listbox.grid(row=0, column=1, rowspan=5)
+    given_listbox.grid(row=1, column=1, rowspan=5)
     choices = list()
-    for i, each in enumerate(theorems):
-        x = tk.Button(given_listbox, text=each['label'], command= lambda k=each: highlight(canvas=canvas, points=points, obj=k['elems'])).grid(row=i+1, column=1)
-        choices.append(x)
+    clicked_term = list()
+    stored_labels = list()
 
+    for i, each in enumerate(theorems):
+        x = tk.Button(given_listbox, text=each['label'], command= lambda k=each: highlight(
+            canvas=canvas, 
+            points=points, 
+            obj=k['elems'], 
+            label=k['label'],
+            ct = clicked_term
+            )).grid(row=i+1, column=1)
+        choices.append(x)
+    
+
+    drag_listbox =tk.Listbox(root,highlightbackground='black',highlightcolor='black',highlightthickness=1)
+    drag_listbox.grid(row=1,column=3,rowspan=10)
+    add_button=tk.Button(root,text='>>>', command=lambda : grid_label(drag_listbox, clicked_term, stored_labels)).grid(row=1,column=2)
+   
     root.mainloop()
 
 
