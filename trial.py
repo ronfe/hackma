@@ -40,7 +40,17 @@ def highlight(**kwargs):
     highlighted = list()
 
     for x,*z, y in obj:
-        if len(z) == 0:
+        if x == '△':
+            z1,z2 = z
+            temp_line = canvas.create_line(points[z1][0], points[z1][1], points[z2][0], points[z2][1], fill='purple', width=5)
+            highlighted.append(temp_line)
+
+            temp_line = canvas.create_line(points[z2][0], points[z2][1], points[y][0], points[y][1], fill='purple', width=5)
+            highlighted.append(temp_line)
+
+            temp_line = canvas.create_line(points[z1][0], points[z1][1], points[y][0], points[y][1], fill='purple', width=5)
+            highlighted.append(temp_line)
+        elif len(z) == 0:
             temp_line = canvas.create_line(points[x][0], points[x][1], points[y][0], points[y][1], fill='purple', width=5)
             highlighted.append(temp_line)
         else:
@@ -79,6 +89,16 @@ def main():
             "type": "101",
             "elems": ["AD", "BC"],
             "label": "AD∥BC"
+        },
+        {
+            "type": "102",
+            "elems": ["AF", "BC"],
+            "label": "AF⊥BC"
+        },
+        {
+            "type": "306",
+            "elems": ["EAC", "△ABC"],
+            "label": "∠EAC 是 △ABC 的外角"
         }
     ]
 
