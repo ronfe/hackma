@@ -39,9 +39,24 @@ def highlight(**kwargs):
 
     highlighted = list()
 
-    for x,y in obj:
-        temp_line = canvas.create_line(points[x][0], points[x][1], points[y][0], points[y][1], fill='purple', width=5)
-        highlighted.append(temp_line)
+    for x,*z, y in obj:
+        if len(z) == 0:
+            temp_line = canvas.create_line(points[x][0], points[x][1], points[y][0], points[y][1], fill='purple', width=5)
+            highlighted.append(temp_line)
+        else:
+            z = z[0]
+
+            ## STEP 1
+            # (x0, y0), (x1,y1) = x+z, z+y
+
+            ## STEP 2
+            
+
+            ## STEP 3
+            temp_arc = canvas.create_line(points[x][0], points[x][1], points[z][0], points[z][1],  fill='green', width=5)
+            temp_arc_2 = canvas.create_line(points[z][0], points[z][1], points[y][0], points[y][1],  fill='green', width=5)
+
+            highlighted += [temp_arc, temp_arc_2]
     
     canvas.after(4000, delete_objs, canvas,highlighted)
     return 
@@ -57,7 +72,7 @@ def main():
     }
     theorems = [{
         "type": "311",
-        "elems": ["AD", "EA"],
+        "elems": ["AD", "EAC"],
         "label": "AD是∠EAC的角平分线"
     },
         {
