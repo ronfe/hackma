@@ -35,7 +35,7 @@ def highlight(**kwargs):
     canvas = kwargs['canvas']
     points = kwargs['points']
     obj = kwargs['obj']
-
+    
 
     highlighted = list()
 
@@ -107,7 +107,7 @@ def main():
     root.title("Hack 2018")
 
     canvas = make_canvas(root, points)
-    canvas_2 = make_canvas(root, points, row=11)
+    #canvas_2 = make_canvas(root, points, row=11)
 
     # temp_line = canvas.create_line(points['B'][0], points['B'][1], points['C'][0], points['C'][1], fill='purple', width=5)
     # canvas.after(4000, canvas.delete, temp_line)
@@ -116,12 +116,17 @@ def main():
     # condition_frames = insert_given(theorems, given_frame)
 
     given_listbox = tk.Listbox(root, highlightbackground='black', highlightcolor='black', highlightthickness=1)
-    given_listbox.grid(row=0, column=1, rowspan=5)
+    given_listbox.grid(row=1, column=1, rowspan=5)
     choices = list()
     for i, each in enumerate(theorems):
         x = tk.Button(given_listbox, text=each['label'], command= lambda k=each: highlight(canvas=canvas, points=points, obj=k['elems'])).grid(row=i+1, column=1)
         choices.append(x)
+    
+    add_button=tk.Button(root,text='>>>').grid(row=1,column=2)
 
+    drag_listbox =tk.Listbox(root,highlightbackground='black',highlightcolor='black',highlightthickness=1)
+    drag_listbox.grid(row=1,column=3,rowspan=1)
+   
     root.mainloop()
 
 
