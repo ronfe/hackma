@@ -9,6 +9,9 @@ def convert_coordinate(x, y, d=50, q=75):
 def add_one(a,b):
     return a+b+1
 
+def add_two(a, b):
+    return a+b+2
+
 def make_canvas(root, points, row=0, column=0):
     canvas = tk.Canvas(root, width=400, height=330)
     canvas.grid(row=row, column=column, rowspan=10, sticky='n')
