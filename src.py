@@ -19,6 +19,8 @@ def judge_type(_input, _output, index):
         "input": ["101"],
         "output": ["301"]
     },
+    13: {
+        "input": ["101"]},
     #三角形的外角和
     20: {
         "input": ["306"],
@@ -30,6 +32,8 @@ def judge_type(_input, _output, index):
         "output": ["301"]
     }
 }
+
+
     i, o = theorem_type[index]['input'], theorem_type[index]['output']
     flag_i = False
     flag_o = False
