@@ -70,18 +70,47 @@ def TD311(setting, **kwargs):
         claims['elems'][1]
         )
     return k
-    
 
+
+def T13(setting, **kwargs):
+    '''
+        两直线平行，内错角相等
+        1-to-many
+        rtype: bool
+    '''
+    condition = kwargs['conditions'][0]
+    claims = kwargs['claims'][0]
+    k = src.judge_type([condition], [claims], 13)
+    if k == False:
+        return k
+
+
+def T20 (setting, **kwargs):
+    '''
+        三角形外角等于不相邻的两个内角和
+        1-to-many
+        rtype: bool
+    '''
+    condition = kwargs['conditions'][0]
+    claims = kwargs['claims'][0]
+    k = src.judge_type([condition], [claims], 20)
+    if k == False:
+        return k
+    #判断是两个不相邻内角和
+    k = utility.judge_buxianglinneijiaohe(claims['elems'][1])
+    return k
+    
 
 if __name__ == '__main__':
     c = {
-        "type": "311",
-        "elems": ["AD", "EAC"],
-        "label": "AD是∠EAC的角平分线"
+        "type": "306",
+        "elems": ["EAC", "TABC"],
+        "label": "∠EAC是三角形ABC的外角"
     }
     r = {
         "type": "301",
-        "elems": ["EAD", "DAC"],
-        "label": "∠EAD=∠DAC"
+        "elems": ["EAC", "ABCBCA"],
+        "label": "∠EAC=∠ABC+∠BCA"
     }
-    print(TD311(setting, conditions=[c], claims=[r]))
+    
+    print(T20(setting, conditions=[c], claims=[r]))
