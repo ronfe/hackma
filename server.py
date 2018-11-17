@@ -14,7 +14,7 @@ practice_log = [
 ]
 
 all_theorem = [
-    theorem.T12, theorem.TD311
+    theorem.T12, theorem.TD311, theorem.T13, theorem.T20, theorem.Replace
 ]
 
 
@@ -29,8 +29,16 @@ def judge_step_correct(step, setting):
 def rater(practice_log, setting):
     # some code
     step_correctness = list()
+    error_claims = list()
     for step in practice_log:
+        x = [t in error_claims for t in step['dueto']]
+        if sum(x) > 0:
+            step_correctness.append(False)
+            error_claims += step['therefore']
+            continue
         k = judge_step_correct(step, setting)
+        if k == False:
+            error_claims += step['therefore']
         step_correctness.append(k)
     return {
         "score": sum(step_correctness),

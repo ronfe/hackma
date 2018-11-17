@@ -74,22 +74,22 @@ def angle_neicuo(setting, parallel_a, parallel_b, angle_a, angle_b): #线AD 线B
     
     ### 2. 构成内错关系
     #### 2.1  角23位 = 角12位    
-    con_point_23, con_point_12 = angle_a[1:], angle_b[0:2]
-    if not judge_presence(setting, con_point_23, con_point_12):
+    con_point_23, con_point_12 = angle_a[1:], angle_b[1:]
+    if con_point_23[0] != con_point_12[1] or con_point_23[1] != con_point_12[0]:
         return False
     
     #### 2.2 角12位 （同方向）平行 角23位
-    alt_a, alt_b = find_alternative_segments(setting, parallel_a[0], parallel_a[1]), find_alternative_segments(setting, parallel_b[0], parallel_b[1])
-    if angle_a[1:] in alt_a and angle_b[1:] in alt_b:
-        return True
+    # alt_a, alt_b = find_alternative_segments(setting, parallel_a[0], parallel_a[1]), find_alternative_segments(setting, parallel_b[0], parallel_b[1])
+    # if angle_a[1:] in alt_a and angle_b[1:] in alt_b:
+    #     return True
 
     angle_a_23 = angle_a[0:2]
-    angle_b_23 = angle_b[1:]
+    angle_b_23 = angle_b[0:2]
     a,b = addup_keyword(setting, angle_a_23[1], angle_a_23[0]),addup_keyword(setting, angle_b_23[1], angle_b_23[0])
     direction_a = setting[angle_a_23[0]][a]
     direction_b = setting[angle_b_23[0]][b]
 
-    if direction_a == direction_b:
+    if direction_a != direction_b:
         return True
 
     return False
