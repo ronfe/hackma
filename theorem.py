@@ -83,6 +83,9 @@ def T13(setting, **kwargs):
     k = src.judge_type([condition], [claims], 13)
     if k == False:
         return k
+    
+    t = utility.angle_neicuo(setting, condition['elems'][0], condition['elems'][1], claims['elems'][0], claims['elems'][1])
+    return t
 
 
 def T20 (setting, **kwargs):
@@ -99,6 +102,15 @@ def T20 (setting, **kwargs):
     #判断是两个不相邻内角和
     k = utility.judge_buxianglinneijiaohe(claims['elems'][1])
     return k
+
+def Replace(setting, **kwargs):
+    conditions = kwargs['conditions'] + kwargs['claims']
+    flag = conditions[0]['type']
+    for each in conditions[1:]:
+        if flag != each['type']:
+            return False
+
+    return True
     
 
 if __name__ == '__main__':
